@@ -46,8 +46,7 @@ CREATE TABLE USERS(
   role VARCHAR(255) NOT NULL,
   status VARCHAR(255) NOT NULL,
   registration_date DATE NOT NULL,
-  rating INT NOT NULL,
-  skills INT NOT NULL
+  rating INT NOT NULL
 );
 CREATE TABLE ORDERS(
   order_id SERIAL PRIMARY KEY,

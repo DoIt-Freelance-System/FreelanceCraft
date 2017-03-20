@@ -2,18 +2,18 @@ DROP DATABASE IF EXISTS FREELANCESYSTEM;
 
 CREATE DATABASE FREELANCESYSTEM;
 
-alter table if exists USER_SKILLS drop constraint skills_skill_id_fkey;
-alter table if exists ORDERS drop constraint customer_user_id_fkey;
-alter table if exists MESSAGES drop constraint message_sender_user_id_fkey;
-alter table if exists MESSAGES drop constraint message_recipient_user_id_fkey;
-alter table if exists PAYMENTS drop constraint payment_order_id_order_id_fkey;
-alter table if exists FEEDBACKS drop constraint feedback_order_id_order_id_fkey;
-alter table if exists FEEDBACKS drop constraint feedback_recipient_user_id_fkey;
-alter table if exists FEEDBACKS drop constraint feedback_sender_user_id_fkey;
-alter table if exists ATTACHMENTS drop constraint attachment_message_id_message_id_fkey;
-alter table if exists ATTACHMENTS drop constraint attachment_order_id_order_id_fkey;
-alter table if exists USER_SKILLS drop constraint userskill_skill_id_skill_id_fkey;
-alter table if exists USER_SKILLS drop constraint userskill_user_id_user_id_fkey;
+alter table if exists USER_SKILLS drop constraint userskill_skill_id_fkey;
+alter table if exists ORDERS drop constraint customer_fkey;
+alter table if exists MESSAGES drop constraint sender_of_message_fkey;
+alter table if exists MESSAGES drop constraint recipient_of_message_fkey;
+alter table if exists PAYMENTS drop constraint order_id_of_payment_fkey;
+alter table if exists FEEDBACKS drop constraint sender_of_feedback_fkey;
+alter table if exists FEEDBACKS drop constraint recipient_of_feedback_fkey;
+alter table if exists FEEDBACKS drop constraint order_id_of_feedback_fkey;
+alter table if exists ATTACHMENTS drop constraint message_id_of_attachment_fkey;
+alter table if exists ATTACHMENTS drop constraint order_id_of_attachment_fkey;
+alter table if exists USER_SKILLS drop constraint userskill_user_id_fkey;
+alter table if exists USER_SKILLS drop constraint userskill_skill_id_fkey;
 
 
 drop table if exists USERS;
@@ -32,12 +32,12 @@ CREATE SCHEMA IF NOT EXISTS final_project;
 
 
 CREATE TABLE SKILLS(
-  skill_id SERIAL NOT NULL PRIMARY KEY,
+  skill_id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE USERS(
-  user_id SERIAL NOT NULL  PRIMARY KEY,
+  user_id SERIAL PRIMARY KEY,
   user_nickname VARCHAR(255) NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
@@ -50,61 +50,60 @@ CREATE TABLE USERS(
   skills INT NOT NULL
 );
 CREATE TABLE ORDERS(
-  order_id SERIAL NOT NULL PRIMARY KEY,
+  order_id SERIAL PRIMARY KEY,
   customer INT NOT NULL,
   text VARCHAR NOT NULL,
   price INT NOT NULL,
   date_of_creation DATE NOT NULL,
   date_of_complection DATE,
-  order_type VARCHAR NOT NULL,
+  type_of_order VARCHAR NOT NULL,
   status VARCHAR(255) NOT NULL
 );
 CREATE TABLE MESSAGES(
-  message_id SERIAL NOT NULL PRIMARY KEY,
-  message_text VARCHAR NOT NULL,
-  message_date DATE NOT NULL,
-  message_sender INT NOT NULL,
-  message_recipient INT NOT NULL,
+  message_id SERIAL PRIMARY KEY,
+  text_of_message VARCHAR NOT NULL,
+  date_of_sending DATE NOT NULL,
+  sender_of_message INT NOT NULL,
+  recipient_of_message INT NOT NULL,
   type VARCHAR NOT NULL,
   status VARCHAR NOT NULL
 );
 
 CREATE TABLE PAYMENTS(
-  payment_id SERIAL NOT NULL PRIMARY KEY,
+  payment_id SERIAL PRIMARY KEY,
   ammount INT NOT NULL,
-  payment_date DATE NOT NULL,
-  payment_order_id INT NOT NULL,
+  date_of_payment DATE NOT NULL,
+  order_id_of_payment INT NOT NULL,
   status VARCHAR(255) NOT NUll
 );
 CREATE TABLE FEEDBACKS(
-  feedback_id SERIAL NOT NULL PRIMARY KEY,
-  feedback_date DATE NOT NULL,
-  feedback_text VARCHAR NOT NULL,
-  feedback_sender INT NOT NULL,
-  feedback_recipient INT NOT NULL,
-  feedback_order_id INT NOT NULL
+  feedback_id SERIAL PRIMARY KEY,
+  date_of_feedback DATE NOT NULL,
+  text_of_feedback VARCHAR NOT NULL,
+  sender_of_feedback INT NOT NULL,
+  recipient_of_feedback INT NOT NULL,
+  order_id_of_feedback INT NOT NULL
 );
 CREATE TABLE ATTACHMENTS(
-  attachment_id SERIAL NOT NULL PRIMARY KEY,
+  attachment_id SERIAL PRIMARY KEY,
   link VARCHAR,
-  attachment_message_id INT NOT NULL,
-  attachment_order_id INT NOT NULL
+  message_id_of_attachment INT NOT NULL,
+  order_id_of_attachment INT NOT NULL
 );
 create table USER_SKILLS(
   userskill_user_id INT NOT NULL,
   userskill_skill_id INT NOT NULL
 );
 
-ALTER TABLE final_project.user_skills ADD CONSTRAINT skills_skill_id_fkey FOREIGN KEY (userskill_skill_id) REFERENCES final_project.skills (skill_id) MATCH SIMPLE ON UPDATE NO ACTION ON DELETE NO ACTION;
-CREATE INDEX fki_skills_skill_id_fkey ON final_project.user_skills(userskill_skill_id);
-alter table ORDERS ADD CONSTRAINT customer_user_id_fkey FOREIGN KEY (customer) REFERENCES USERS(user_id);
-alter table MESSAGES ADD CONSTRAINT  message_sender_user_id_fkey FOREIGN KEY (message_sender) REFERENCES USERS(user_id);
-alter table MESSAGES ADD CONSTRAINT  message_recipient_user_id_fkey FOREIGN KEY (message_recipient) REFERENCES USERS(user_id);
-alter table PAYMENTS ADD CONSTRAINT  payment_order_id_order_id_fkey FOREIGN KEY (payment_order_id) REFERENCES ORDERS(order_id);
-alter table FEEDBACKS ADD CONSTRAINT  feedback_sender_user_id_fkey FOREIGN KEY (feedback_sender) REFERENCES USERS(user_id);
-alter table FEEDBACKS ADD CONSTRAINT  feedback_recipient_user_id_fkey FOREIGN KEY (feedback_recipient) REFERENCES USERS(user_id);
-alter table FEEDBACKS ADD CONSTRAINT  feedback_order_id_order_id_fkey FOREIGN KEY (feedback_order_id) REFERENCES ORDERS(order_id);
-alter table ATTACHMENTS ADD CONSTRAINT attachment_message_id_message_id_fkey FOREIGN KEY (attachment_message_id) REFERENCES MESSAGES(message_id);
-alter table ATTACHMENTS ADD CONSTRAINT  attachment_order_id_order_id_fkey FOREIGN KEY (attachment_order_id) REFERENCES ORDERS(order_id);
-alter table USER_SKILLS ADD CONSTRAINT  userskill_user_id_user_id_fkey FOREIGN KEY (userskill_user_id) REFERENCES USERS(user_id);
-alter table USER_SKILLS ADD CONSTRAINT  userskill_skill_id_skill_id_fkey FOREIGN KEY (userskill_skill_id) REFERENCES SKILLS(skill_id);
+alter table USER_SKILLS ADD CONSTRAINT userskill_skill_id_fkey FOREIGN KEY (userskill_skill_id) REFERENCES SKILLS (skill_id);
+alter table ORDERS ADD CONSTRAINT customer_fkey FOREIGN KEY (customer) REFERENCES USERS(user_id);
+alter table MESSAGES ADD CONSTRAINT  sender_of_message_fkey FOREIGN KEY (sender_of_message) REFERENCES USERS(user_id);
+alter table MESSAGES ADD CONSTRAINT  recipient_of_message_fkey FOREIGN KEY (recipient_of_message) REFERENCES USERS(user_id);
+alter table PAYMENTS ADD CONSTRAINT  order_id_of_payment_fkey FOREIGN KEY (order_id_of_payment) REFERENCES ORDERS(order_id);
+alter table FEEDBACKS ADD CONSTRAINT  sender_of_feedback_fkey FOREIGN KEY (sender_of_feedback) REFERENCES USERS(user_id);
+alter table FEEDBACKS ADD CONSTRAINT  frecipient_of_feedback_fkey FOREIGN KEY (recipient_of_feedback) REFERENCES USERS(user_id);
+alter table FEEDBACKS ADD CONSTRAINT  order_id_of_feedback_fkey FOREIGN KEY (order_id_of_feedback) REFERENCES ORDERS(order_id);
+alter table ATTACHMENTS ADD CONSTRAINT message_id_of_attachment_fkey FOREIGN KEY (message_id_of_attachment) REFERENCES MESSAGES(message_id);
+alter table ATTACHMENTS ADD CONSTRAINT  order_id_of_attachment_fkey FOREIGN KEY (order_id_of_attachment) REFERENCES ORDERS(order_id);
+alter table USER_SKILLS ADD CONSTRAINT  userskill_user_id_fkey FOREIGN KEY (userskill_user_id) REFERENCES USERS(user_id);
+alter table USER_SKILLS ADD CONSTRAINT  userskill_skill_id_fkey FOREIGN KEY (userskill_skill_id) REFERENCES SKILLS(skill_id);

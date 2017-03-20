@@ -5,14 +5,14 @@ CREATE DATABASE FREELANCESYSTEM;
 DROP SCHEMA IF EXISTS final_project;
 CREATE SCHEMA IF NOT EXISTS final_project;
 
-drop table if exists MESSAGES;
+drop table if exists USER_SKILLS;
 drop table if exists SKILLS;
 drop table if exists PAYMENTS;
 drop table if exists FEEDBACKS;
 drop table if exists ATTACHMENTS;
-drop table if exists USER_SKILLS;
-drop table if exists USERS;
+drop table if exists MESSAGES;
 drop table if exists ORDERS;
+drop table if exists USERS;
 
 CREATE TABLE SKILLS(
   skill_id SERIAL PRIMARY KEY,

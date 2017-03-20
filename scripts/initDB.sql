@@ -13,6 +13,7 @@ drop table if exists ATTACHMENTS;
 drop table if exists MESSAGES;
 drop table if exists ORDERS;
 drop table if exists USERS;
+DROP TABLE if EXISTS USER_ORDERS;
 
 CREATE TABLE SKILLS(
   skill_id SERIAL PRIMARY KEY,
@@ -75,4 +76,8 @@ CREATE TABLE ATTACHMENTS(
 create table USER_SKILLS(
   userskill_user_id SERIAL,
   userskill_skill_id SERIAL
+);
+CREATE TABLE USER_ORDERS(
+  user_order_user_id SERIAL PRIMARY KEY,
+  user_order_order_id SERIAL PRIMARY KEY
 );

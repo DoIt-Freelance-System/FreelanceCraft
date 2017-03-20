@@ -68,10 +68,10 @@ CREATE TABLE ATTACHMENTS(
   order_id_of_attachment INT NOT NULL REFERENCES ORDERS
 );
 create table USER_SKILLS(
-  userskill_user_id SERIAL,
-  userskill_skill_id SERIAL
+  userskill_user_id INT REFERENCES USERS,
+  userskill_skill_id SERIAL REFERENCES SKILLS
 );
 CREATE TABLE USER_ORDERS(
-  user_order_user_id SERIAL,
-  user_order_order_id SERIAL
+  user_order_user_id INT REFERENCES USERS,
+  user_order_order_id INT REFERENCES ORDERS
 );

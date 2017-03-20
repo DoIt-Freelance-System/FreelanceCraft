@@ -69,7 +69,7 @@ CREATE TABLE ATTACHMENTS(
 );
 create table USER_SKILLS(
   userskill_user_id INT REFERENCES USERS,
-  userskill_skill_id SERIAL REFERENCES SKILLS
+  userskill_skill_id INT REFERENCES SKILLS
 );
 CREATE TABLE USER_ORDERS(
   user_order_user_id INT REFERENCES USERS,

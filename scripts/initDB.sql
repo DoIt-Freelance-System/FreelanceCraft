@@ -78,6 +78,6 @@ create table USER_SKILLS(
   userskill_skill_id SERIAL
 );
 CREATE TABLE USER_ORDERS(
-  user_order_user_id SERIAL PRIMARY KEY,
-  user_order_order_id SERIAL PRIMARY KEY
+  user_order_user_id SERIAL,
+  user_order_order_id SERIAL
 );

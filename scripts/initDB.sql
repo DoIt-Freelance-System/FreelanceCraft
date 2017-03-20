@@ -13,7 +13,7 @@ alter table if exists FEEDBACKS drop constraint order_id_of_feedback_fkey;
 alter table if exists ATTACHMENTS drop constraint message_id_of_attachment_fkey;
 alter table if exists ATTACHMENTS drop constraint order_id_of_attachment_fkey;
 alter table if exists USER_SKILLS drop constraint userskill_user_id_fkey;
-alter table if exists USER_SKILLS drop constraint userskill_skill_id_fkey;
+
 
 
 drop table if exists USERS;
@@ -106,4 +106,3 @@ alter table FEEDBACKS ADD CONSTRAINT  order_id_of_feedback_fkey FOREIGN KEY (ord
 alter table ATTACHMENTS ADD CONSTRAINT message_id_of_attachment_fkey FOREIGN KEY (message_id_of_attachment) REFERENCES MESSAGES(message_id);
 alter table ATTACHMENTS ADD CONSTRAINT  order_id_of_attachment_fkey FOREIGN KEY (order_id_of_attachment) REFERENCES ORDERS(order_id);
 alter table USER_SKILLS ADD CONSTRAINT  userskill_user_id_fkey FOREIGN KEY (userskill_user_id) REFERENCES USERS(user_id);
-alter table USER_SKILLS ADD CONSTRAINT  userskill_skill_id_fkey FOREIGN KEY (userskill_skill_id) REFERENCES SKILLS(skill_id);

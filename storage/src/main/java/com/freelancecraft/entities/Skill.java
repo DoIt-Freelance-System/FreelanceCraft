@@ -1,6 +1,7 @@
 package com.freelancecraft.entities;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 
 @Entity
 @Table(name = "SKILLS")

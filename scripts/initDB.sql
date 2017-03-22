@@ -43,26 +43,26 @@ CREATE TABLE MESSAGES(
   message_id SERIAL PRIMARY KEY,
   text_of_message TEXT NOT NULL,
   date_of_sending TIMESTAMP DEFAULT current_timestamp,
-  sender INT NOT NULL REFERENCES USERS,
-  recipient INT NOT NULL REFERENCES USERS,
-  type VARCHAR(255) NOT NULL,
-  status VARCHAR(255) NOT NULL /* set default*/
+  message_sender INT NOT NULL REFERENCES USERS,
+  message_recipient INT NOT NULL REFERENCES USERS,
+  message_type VARCHAR(255) NOT NULL,
+  message_status VARCHAR(255) NOT NULL /* set default*/
 );
 
 CREATE TABLE PAYMENTS(
   payment_id SERIAL PRIMARY KEY,
-  ammount DOUBLE PRECISION NOT NULL,
+  payment_amount DOUBLE PRECISION NOT NULL,
   date_of_payment TIMESTAMP DEFAULT current_timestamp,
   order_id INT NOT NULL REFERENCES ORDERS,
-  status VARCHAR(255) NOT NULL /* set default*/
+  payment_status VARCHAR(255) NOT NULL /* set default*/
 );
 
 CREATE TABLE FEEDBACK(
   feedback_id SERIAL PRIMARY KEY,
   date_of_feedback TIMESTAMP DEFAULT current_timestamp,
   text_of_feedback TEXT NOT NULL,
-  sender INT NOT NULL REFERENCES USERS,
-  recipient INT REFERENCES USERS,
+  feedback_sender INT NOT NULL REFERENCES USERS,
+  feedback_recipient INT REFERENCES USERS,
   order_id INT REFERENCES ORDERS
 );
 

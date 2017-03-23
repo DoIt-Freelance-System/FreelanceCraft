@@ -14,7 +14,7 @@ public class Order {
     private int orderId;
     @Column(name = "name")
     private String name;
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "user_id")
     private int customer;
     @Column(name = "description")

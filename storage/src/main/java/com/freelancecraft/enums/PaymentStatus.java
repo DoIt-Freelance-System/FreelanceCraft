@@ -1,4 +1,4 @@
-package com.freelancecraft.entities;
+package com.freelancecraft.enums;
 
 /**
  * Created by Sergiy on 3/24/17.

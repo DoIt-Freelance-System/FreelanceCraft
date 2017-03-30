@@ -34,6 +34,7 @@ public class Message {
     @Column(name = "message_status")
     private MessageStatus messageStatus;
 
+
     public Message() {
     }
 

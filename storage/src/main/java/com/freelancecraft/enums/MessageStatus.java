@@ -1,7 +1,7 @@
 package com.freelancecraft.enums;
 
 public enum MessageStatus {
-    SENDED, RECEIVED;
+    SENT, RECEIVED;
     //CREATED
     //DELETED
     //READED

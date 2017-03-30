@@ -1,5 +1,8 @@
 package com.freelancecraft.entities;
 
+import com.freelancecraft.enums.MessageStatus;
+import com.freelancecraft.enums.MessageType;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -26,10 +29,10 @@ public class Message {
     private Date dateOfSending;
 
     @Column(name = "message_type")
-    private String messageType;
+    private MessageType messageType;
 
     @Column(name = "message_status")
-    private String messageStatus;
+    private MessageStatus messageStatus;
 
     public Message() {
     }
@@ -74,19 +77,19 @@ public class Message {
         this.dateOfSending = dateOfSending;
     }
 
-    public String getMessageType() {
+    public MessageType getMessageType() {
         return messageType;
     }
 
-    public void setMessageType(String messageType) {
+    public void setMessageType(MessageType messageType) {
         this.messageType = messageType;
     }
 
-    public String getMessageStatus() {
+    public MessageStatus getMessageStatus() {
         return messageStatus;
     }
 
-    public void setMessageStatus(String messageStatus) {
+    public void setMessageStatus(MessageStatus messageStatus) {
         this.messageStatus = messageStatus;
     }
 
@@ -106,8 +109,8 @@ public class Message {
             return false;
         if (dateOfSending != null ? !dateOfSending.equals(message.dateOfSending) : message.dateOfSending != null)
             return false;
-        if (messageType != null ? !messageType.equals(message.messageType) : message.messageType != null) return false;
-        return messageStatus != null ? messageStatus.equals(message.messageStatus) : message.messageStatus == null;
+        if (messageType != message.messageType) return false;
+        return messageStatus == message.messageStatus;
     }
 
     @Override
@@ -130,8 +133,8 @@ public class Message {
                 ", messageRecipient=" + messageRecipient +
                 ", textOfMessage='" + textOfMessage + '\'' +
                 ", dateOfSending=" + dateOfSending +
-                ", messageType='" + messageType + '\'' +
-                ", messageStatus='" + messageStatus + '\'' +
+                ", messageType=" + messageType +
+                ", messageStatus=" + messageStatus +
                 '}';
     }
 }

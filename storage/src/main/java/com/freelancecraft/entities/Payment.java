@@ -3,9 +3,6 @@ package com.freelancecraft.entities;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Sergiy on 3/23/17.
- */
 @Entity
 @Table(name = "PAYMENTS")
 public class Payment {
@@ -16,7 +13,7 @@ public class Payment {
 
     @OneToMany
     @JoinColumn(name = "order_id")
-    private int orderId;
+    private Order order;
 
     @Column(name = "payment_amount")
     private double paymentAmount;
@@ -38,12 +35,12 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public double getPaymentAmount() {
@@ -78,10 +75,11 @@ public class Payment {
         Payment payment = (Payment) o;
 
         if (paymentId != payment.paymentId) return false;
-        if (orderId != payment.orderId) return false;
         if (Double.compare(payment.paymentAmount, paymentAmount) != 0) return false;
-        if (!dateOfPayment.equals(payment.dateOfPayment)) return false;
-        return paymentStatus.equals(payment.paymentStatus);
+        if (order != null ? !order.equals(payment.order) : payment.order != null) return false;
+        if (dateOfPayment != null ? !dateOfPayment.equals(payment.dateOfPayment) : payment.dateOfPayment != null)
+            return false;
+        return paymentStatus != null ? paymentStatus.equals(payment.paymentStatus) : payment.paymentStatus == null;
     }
 
     @Override
@@ -89,11 +87,11 @@ public class Payment {
         int result;
         long temp;
         result = paymentId;
-        result = 31 * result + orderId;
+        result = 31 * result + (order != null ? order.hashCode() : 0);
         temp = Double.doubleToLongBits(paymentAmount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + dateOfPayment.hashCode();
-        result = 31 * result + paymentStatus.hashCode();
+        result = 31 * result + (dateOfPayment != null ? dateOfPayment.hashCode() : 0);
+        result = 31 * result + (paymentStatus != null ? paymentStatus.hashCode() : 0);
         return result;
     }
 
@@ -101,7 +99,7 @@ public class Payment {
     public String toString() {
         return "Payment{" +
                 "paymentId=" + paymentId +
-                ", orderId=" + orderId +
+                ", order=" + order +
                 ", paymentAmount=" + paymentAmount +
                 ", dateOfPayment=" + dateOfPayment +
                 ", paymentStatus='" + paymentStatus + '\'' +

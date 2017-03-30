@@ -3,9 +3,6 @@ package com.freelancecraft.entities;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Sergiy on 3/23/17.
- */
 @Entity
 @Table(name = "ATTACHMENTS")
 public class Attachment {
@@ -16,11 +13,11 @@ public class Attachment {
 
     @OneToMany
     @JoinColumn(name = "message_id")
-    private int messageId;
+    private Message message;
 
     @OneToMany
     @JoinColumn(name = "order_id")
-    private int orderId;
+    private Order order;
 
     @Column(name = "name")
     private String name;
@@ -36,20 +33,20 @@ public class Attachment {
         this.attachmentId = attachmentId;
     }
 
-    public int getMessageId() {
-        return messageId;
+    public Message getMessage() {
+        return message;
     }
 
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
+    public void setMessage(Message message) {
+        this.message = message;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     public String getName() {
@@ -68,17 +65,17 @@ public class Attachment {
         Attachment that = (Attachment) o;
 
         if (attachmentId != that.attachmentId) return false;
-        if (messageId != that.messageId) return false;
-        if (orderId != that.orderId) return false;
-        return name.equals(that.name);
+        if (message != null ? !message.equals(that.message) : that.message != null) return false;
+        if (order != null ? !order.equals(that.order) : that.order != null) return false;
+        return name != null ? name.equals(that.name) : that.name == null;
     }
 
     @Override
     public int hashCode() {
         int result = attachmentId;
-        result = 31 * result + messageId;
-        result = 31 * result + orderId;
-        result = 31 * result + name.hashCode();
+        result = 31 * result + (message != null ? message.hashCode() : 0);
+        result = 31 * result + (order != null ? order.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
 
@@ -86,8 +83,8 @@ public class Attachment {
     public String toString() {
         return "Attachment{" +
                 "attachmentId=" + attachmentId +
-                ", messageId=" + messageId +
-                ", orderId=" + orderId +
+                ", message=" + message +
+                ", order=" + order +
                 ", name='" + name + '\'' +
                 '}';
     }

@@ -16,11 +16,11 @@ public class Feedback {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private int feedbackSender;
+    private User feedbackSender;
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private int feedbackRecipient;
+    private User feedbackRecipient;
 
     @OneToMany
     @JoinColumn(name = "order_id")
@@ -43,20 +43,20 @@ public class Feedback {
         this.feedbackId = feedbackId;
     }
 
-    public int getSender() {
+    public User getFeedbackSender() {
         return feedbackSender;
     }
 
-    public void setSender(int sender) {
-        this.feedbackSender = sender;
+    public void setFeedbackSender(User feedbackSender) {
+        this.feedbackSender = feedbackSender;
     }
 
-    public int getRecipient() {
+    public User getFeedbackRecipient() {
         return feedbackRecipient;
     }
 
-    public void setRecipient(int recipient) {
-        this.feedbackRecipient = recipient;
+    public void setFeedbackRecipient(User feedbackRecipient) {
+        this.feedbackRecipient = feedbackRecipient;
     }
 
     public int getOderId() {
@@ -91,21 +91,24 @@ public class Feedback {
         Feedback feedback = (Feedback) o;
 
         if (feedbackId != feedback.feedbackId) return false;
-        if (feedbackSender != feedback.feedbackSender) return false;
-        if (feedbackRecipient != feedback.feedbackRecipient) return false;
         if (oderId != feedback.oderId) return false;
-        if (!textOfFeedback.equals(feedback.textOfFeedback)) return false;
-        return dateOfFeedback.equals(feedback.dateOfFeedback);
+        if (feedbackSender != null ? !feedbackSender.equals(feedback.feedbackSender) : feedback.feedbackSender != null)
+            return false;
+        if (feedbackRecipient != null ? !feedbackRecipient.equals(feedback.feedbackRecipient) : feedback.feedbackRecipient != null)
+            return false;
+        if (textOfFeedback != null ? !textOfFeedback.equals(feedback.textOfFeedback) : feedback.textOfFeedback != null)
+            return false;
+        return dateOfFeedback != null ? dateOfFeedback.equals(feedback.dateOfFeedback) : feedback.dateOfFeedback == null;
     }
 
     @Override
     public int hashCode() {
         int result = feedbackId;
-        result = 31 * result + feedbackSender;
-        result = 31 * result + feedbackRecipient;
+        result = 31 * result + (feedbackSender != null ? feedbackSender.hashCode() : 0);
+        result = 31 * result + (feedbackRecipient != null ? feedbackRecipient.hashCode() : 0);
         result = 31 * result + oderId;
-        result = 31 * result + textOfFeedback.hashCode();
-        result = 31 * result + dateOfFeedback.hashCode();
+        result = 31 * result + (textOfFeedback != null ? textOfFeedback.hashCode() : 0);
+        result = 31 * result + (dateOfFeedback != null ? dateOfFeedback.hashCode() : 0);
         return result;
     }
 
@@ -113,8 +116,8 @@ public class Feedback {
     public String toString() {
         return "Feedback{" +
                 "feedbackId=" + feedbackId +
-                ", sender=" + feedbackSender +
-                ", recipient=" + feedbackRecipient +
+                ", feedbackSender=" + feedbackSender +
+                ", feedbackRecipient=" + feedbackRecipient +
                 ", oderId=" + oderId +
                 ", textOfFeedback='" + textOfFeedback + '\'' +
                 ", dateOfFeedback=" + dateOfFeedback +

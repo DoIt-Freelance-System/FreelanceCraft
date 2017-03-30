@@ -3,9 +3,6 @@ package com.freelancecraft.entities;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Sergiy on 3/23/17.
- */
 @Entity
 @Table(name = "MESSAGES")
 public class Message {
@@ -16,11 +13,11 @@ public class Message {
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private int messageSender;
+    private User messageSender;
 
     @OneToMany
     @JoinColumn(name = "user_id")
-    private int messageRecipient;
+    private User messageRecipient;
 
     @Column(name = "text_of_message")
     private String textOfMessage;
@@ -45,19 +42,19 @@ public class Message {
         this.messageId = messageId;
     }
 
-    public int getMessageSender() {
+    public User getMessageSender() {
         return messageSender;
     }
 
-    public void setMessageSender(int messageSender) {
+    public void setMessageSender(User messageSender) {
         this.messageSender = messageSender;
     }
 
-    public int getMessageRecipient() {
+    public User getMessageRecipient() {
         return messageRecipient;
     }
 
-    public void setMessageRecipient(int messageRecipient) {
+    public void setMessageRecipient(User messageRecipient) {
         this.messageRecipient = messageRecipient;
     }
 
@@ -101,26 +98,29 @@ public class Message {
         Message message = (Message) o;
 
         if (messageId != message.messageId) return false;
-        if (messageSender != message.messageSender) return false;
-        if (messageRecipient != message.messageRecipient) return false;
-        if (!textOfMessage.equals(message.textOfMessage)) return false;
-        if (!dateOfSending.equals(message.dateOfSending)) return false;
-        if (!messageType.equals(message.messageType)) return false;
-        return messageStatus.equals(message.messageStatus);
+        if (messageSender != null ? !messageSender.equals(message.messageSender) : message.messageSender != null)
+            return false;
+        if (messageRecipient != null ? !messageRecipient.equals(message.messageRecipient) : message.messageRecipient != null)
+            return false;
+        if (textOfMessage != null ? !textOfMessage.equals(message.textOfMessage) : message.textOfMessage != null)
+            return false;
+        if (dateOfSending != null ? !dateOfSending.equals(message.dateOfSending) : message.dateOfSending != null)
+            return false;
+        if (messageType != null ? !messageType.equals(message.messageType) : message.messageType != null) return false;
+        return messageStatus != null ? messageStatus.equals(message.messageStatus) : message.messageStatus == null;
     }
 
     @Override
     public int hashCode() {
         int result = messageId;
-        result = 31 * result + messageSender;
-        result = 31 * result + messageRecipient;
-        result = 31 * result + textOfMessage.hashCode();
-        result = 31 * result + dateOfSending.hashCode();
-        result = 31 * result + messageType.hashCode();
-        result = 31 * result + messageStatus.hashCode();
+        result = 31 * result + (messageSender != null ? messageSender.hashCode() : 0);
+        result = 31 * result + (messageRecipient != null ? messageRecipient.hashCode() : 0);
+        result = 31 * result + (textOfMessage != null ? textOfMessage.hashCode() : 0);
+        result = 31 * result + (dateOfSending != null ? dateOfSending.hashCode() : 0);
+        result = 31 * result + (messageType != null ? messageType.hashCode() : 0);
+        result = 31 * result + (messageStatus != null ? messageStatus.hashCode() : 0);
         return result;
     }
-
 
     @Override
     public String toString() {

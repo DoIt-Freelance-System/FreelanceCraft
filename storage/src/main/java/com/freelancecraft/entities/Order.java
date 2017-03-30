@@ -3,9 +3,6 @@ package com.freelancecraft.entities;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Vlad on 22.03.2017.
- */
 @Entity
 @Table(name = "ORDERS")
 public class Order {
@@ -16,7 +13,7 @@ public class Order {
     private String name;
     @ManyToMany
     @JoinColumn(name = "user_id")
-    private int customer;
+    private User user;
     @Column(name = "description")
     private String description;
     @Column(name = "price")
@@ -49,12 +46,12 @@ public class Order {
         this.name = name;
     }
 
-    public int getCustomer() {
-        return customer;
+    public User getUser() {
+        return user;
     }
 
-    public void setCustomer(int customer) {
-        this.customer = customer;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getDescription() {
@@ -113,9 +110,9 @@ public class Order {
         Order order = (Order) o;
 
         if (orderId != order.orderId) return false;
-        if (customer != order.customer) return false;
         if (Double.compare(order.price, price) != 0) return false;
         if (name != null ? !name.equals(order.name) : order.name != null) return false;
+        if (user != null ? !user.equals(order.user) : order.user != null) return false;
         if (description != null ? !description.equals(order.description) : order.description != null) return false;
         if (dateOfCreation != null ? !dateOfCreation.equals(order.dateOfCreation) : order.dateOfCreation != null)
             return false;
@@ -131,7 +128,7 @@ public class Order {
         long temp;
         result = orderId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + customer;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
@@ -147,7 +144,7 @@ public class Order {
         return "Order{" +
                 "orderId=" + orderId +
                 ", name='" + name + '\'' +
-                ", customer=" + customer +
+                ", user=" + user +
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", dateOfCreation=" + dateOfCreation +

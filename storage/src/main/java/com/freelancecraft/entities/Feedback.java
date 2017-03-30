@@ -3,9 +3,6 @@ package com.freelancecraft.entities;
 import javax.persistence.*;
 import java.util.Date;
 
-/**
- * Created by Sergiy on 3/23/17.
- */
 @Entity
 @Table(name = "FEEDBACK")
 public class Feedback {

@@ -1,5 +1,8 @@
 package com.freelancecraft.entities;
 
+import com.freelancecraft.enums.UserRole;
+import com.freelancecraft.enums.UserStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -28,16 +31,19 @@ public class User {
     private String password;
 
     @Column(name = "role")
-    private String role;
+    private UserRole role;
 
     @Column(name = "status")
-    private String status;
+    private UserStatus status;
 
     @Column(name = "registration_date")
     private Date registrationDate;
 
     @Column(name = "rating")
     private float rating;
+
+    public User() {
+    }
 
     public int getUserId() {
         return userId;
@@ -87,19 +93,19 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public UserRole getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(UserRole role) {
         this.role = role;
     }
 
-    public String getStatus() {
+    public UserStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(UserStatus status) {
         this.status = status;
     }
 
@@ -133,8 +139,8 @@ public class User {
         if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
         if (mail != null ? !mail.equals(user.mail) : user.mail != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (role != null ? !role.equals(user.role) : user.role != null) return false;
-        if (status != null ? !status.equals(user.status) : user.status != null) return false;
+        if (role != user.role) return false;
+        if (status != user.status) return false;
         return registrationDate != null ? registrationDate.equals(user.registrationDate) : user.registrationDate == null;
     }
 
@@ -162,8 +168,8 @@ public class User {
                 ", lastName='" + lastName + '\'' +
                 ", mail='" + mail + '\'' +
                 ", password='" + password + '\'' +
-                ", role='" + role + '\'' +
-                ", status='" + status + '\'' +
+                ", role=" + role +
+                ", status=" + status +
                 ", registrationDate=" + registrationDate +
                 ", rating=" + rating +
                 '}';

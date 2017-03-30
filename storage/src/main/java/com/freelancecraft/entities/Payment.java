@@ -1,5 +1,7 @@
 package com.freelancecraft.entities;
 
+import com.freelancecraft.enums.PaymentStatus;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -22,7 +24,7 @@ public class Payment {
     private Date dateOfPayment;
 
     @Column(name = "payment_status")
-    private String paymentStatus;
+    private PaymentStatus paymentStatus;
 
     public Payment() {
     }
@@ -59,11 +61,11 @@ public class Payment {
         this.dateOfPayment = dateOfPayment;
     }
 
-    public String getPaymentStatus() {
+    public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }
 
-    public void setPaymentStatus(String paymentStatus) {
+    public void setPaymentStatus(PaymentStatus paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
 
@@ -79,7 +81,7 @@ public class Payment {
         if (order != null ? !order.equals(payment.order) : payment.order != null) return false;
         if (dateOfPayment != null ? !dateOfPayment.equals(payment.dateOfPayment) : payment.dateOfPayment != null)
             return false;
-        return paymentStatus != null ? paymentStatus.equals(payment.paymentStatus) : payment.paymentStatus == null;
+        return paymentStatus == payment.paymentStatus;
     }
 
     @Override
@@ -102,7 +104,7 @@ public class Payment {
                 ", order=" + order +
                 ", paymentAmount=" + paymentAmount +
                 ", dateOfPayment=" + dateOfPayment +
-                ", paymentStatus='" + paymentStatus + '\'' +
+                ", paymentStatus=" + paymentStatus +
                 '}';
     }
 }

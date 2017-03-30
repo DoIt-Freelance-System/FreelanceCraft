@@ -1,5 +1,8 @@
 package com.freelancecraft.entities;
 
+import com.freelancecraft.enums.OrderStatus;
+import com.freelancecraft.enums.OrderType;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -23,9 +26,9 @@ public class Order {
     @Column(name = "date_of_completion")
     private Date dateOfComplection;
     @Column(name = "order_type")
-    private String orderType;
+    private OrderType orderType;
     @Column(name = "status")
-    private String status;
+    private OrderStatus orderStatus;
 
     public Order() {
     }
@@ -86,20 +89,20 @@ public class Order {
         this.dateOfComplection = dateOfComplection;
     }
 
-    public String getOrderType() {
+    public OrderType getOrderType() {
         return orderType;
     }
 
-    public void setOrderType(String orderType) {
+    public void setOrderType(OrderType orderType) {
         this.orderType = orderType;
     }
 
-    public String getStatus() {
-        return status;
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     @Override
@@ -118,8 +121,8 @@ public class Order {
             return false;
         if (dateOfComplection != null ? !dateOfComplection.equals(order.dateOfComplection) : order.dateOfComplection != null)
             return false;
-        if (orderType != null ? !orderType.equals(order.orderType) : order.orderType != null) return false;
-        return status != null ? status.equals(order.status) : order.status == null;
+        if (orderType != order.orderType) return false;
+        return orderStatus == order.orderStatus;
     }
 
     @Override
@@ -135,7 +138,7 @@ public class Order {
         result = 31 * result + (dateOfCreation != null ? dateOfCreation.hashCode() : 0);
         result = 31 * result + (dateOfComplection != null ? dateOfComplection.hashCode() : 0);
         result = 31 * result + (orderType != null ? orderType.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (orderStatus != null ? orderStatus.hashCode() : 0);
         return result;
     }
 
@@ -149,8 +152,8 @@ public class Order {
                 ", price=" + price +
                 ", dateOfCreation=" + dateOfCreation +
                 ", dateOfComplection=" + dateOfComplection +
-                ", orderType='" + orderType + '\'' +
-                ", status='" + status + '\'' +
+                ", orderType=" + orderType +
+                ", orderStatus=" + orderStatus +
                 '}';
     }
 }

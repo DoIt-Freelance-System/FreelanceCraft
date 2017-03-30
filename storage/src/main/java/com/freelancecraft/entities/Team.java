@@ -2,9 +2,6 @@ package com.freelancecraft.entities;
 
 import javax.persistence.*;
 
-/**
- * Created by Vlad on 23.03.2017.
- */
 @Entity
 @Table(name = "TEAMS")
 public class Team {
@@ -15,10 +12,10 @@ public class Team {
     private String name;
     @ManyToMany
     @JoinColumn(name = "user_id")
-    private int userId;
+    private User user;
     @ManyToMany
     @JoinColumn(name = "order_id")
-    private int orderId;
+    private Order order;
 
     public Team() {
     }
@@ -31,28 +28,6 @@ public class Team {
         this.teamId = teamId;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Team team = (Team) o;
-
-        if (teamId != team.teamId) return false;
-        if (userId != team.userId) return false;
-        if (orderId != team.orderId) return false;
-        return name != null ? name.equals(team.name) : team.name == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = teamId;
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + userId;
-        result = 31 * result + orderId;
-        return result;
-    }
-
     public String getName() {
         return name;
     }
@@ -61,20 +36,42 @@ public class Team {
         this.name = name;
     }
 
-    public int getUserId() {
-        return userId;
+    public User getUser() {
+        return user;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getOrderId() {
-        return orderId;
+    public Order getOrder() {
+        return order;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setOrder(Order order) {
+        this.order = order;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = teamId;
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (order != null ? order.hashCode() : 0);
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Team team = (Team) o;
+
+        if (teamId != team.teamId) return false;
+        if (name != null ? !name.equals(team.name) : team.name != null) return false;
+        if (user != null ? !user.equals(team.user) : team.user != null) return false;
+        return order != null ? order.equals(team.order) : team.order == null;
     }
 
     @Override
@@ -82,8 +79,8 @@ public class Team {
         return "Team{" +
                 "teamId=" + teamId +
                 ", name='" + name + '\'' +
-                ", userId=" + userId +
-                ", orderId=" + orderId +
+                ", user=" + user +
+                ", order=" + order +
                 '}';
     }
 }

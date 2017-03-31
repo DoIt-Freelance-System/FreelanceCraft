@@ -1,7 +1,6 @@
 package com.freelancecraft.entities;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "ATTACHMENTS")
@@ -19,8 +18,8 @@ public class Attachment {
     @JoinColumn(name = "order_id")
     private Order order;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "link")
+    private String link;
 
     public Attachment() {
     }
@@ -49,12 +48,12 @@ public class Attachment {
         this.order = order;
     }
 
-    public String getName() {
-        return name;
+    public String getLink() {
+        return link;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setLink(String link) {
+        this.link = link;
     }
 
     @Override
@@ -67,7 +66,7 @@ public class Attachment {
         if (attachmentId != that.attachmentId) return false;
         if (message != null ? !message.equals(that.message) : that.message != null) return false;
         if (order != null ? !order.equals(that.order) : that.order != null) return false;
-        return name != null ? name.equals(that.name) : that.name == null;
+        return link != null ? link.equals(that.link) : that.link == null;
     }
 
     @Override
@@ -75,7 +74,7 @@ public class Attachment {
         int result = attachmentId;
         result = 31 * result + (message != null ? message.hashCode() : 0);
         result = 31 * result + (order != null ? order.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (link != null ? link.hashCode() : 0);
         return result;
     }
 
@@ -85,7 +84,7 @@ public class Attachment {
                 "attachmentId=" + attachmentId +
                 ", message=" + message +
                 ", order=" + order +
-                ", name='" + name + '\'' +
+                ", link='" + link + '\'' +
                 '}';
     }
 }

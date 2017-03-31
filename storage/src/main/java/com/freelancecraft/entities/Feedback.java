@@ -21,7 +21,7 @@ public class Feedback {
 
     @OneToMany
     @JoinColumn(name = "order_id")
-    private int oderId;
+    private Order oderId;
 
     @Column(name = "text_of_feedback")
     private String textOfFeedback;
@@ -56,11 +56,11 @@ public class Feedback {
         this.feedbackRecipient = feedbackRecipient;
     }
 
-    public int getOderId() {
+    public Order getOderId() {
         return oderId;
     }
 
-    public void setOderId(int oderId) {
+    public void setOderId(Order oderId) {
         this.oderId = oderId;
     }
 
@@ -101,11 +101,11 @@ public class Feedback {
     @Override
     public int hashCode() {
         int result = feedbackId;
-        result = 31 * result + (feedbackSender != null ? feedbackSender.hashCode() : 0);
+        result = 31 * result + feedbackSender.hashCode();
         result = 31 * result + (feedbackRecipient != null ? feedbackRecipient.hashCode() : 0);
-        result = 31 * result + oderId;
-        result = 31 * result + (textOfFeedback != null ? textOfFeedback.hashCode() : 0);
-        result = 31 * result + (dateOfFeedback != null ? dateOfFeedback.hashCode() : 0);
+        result = 31 * result + (oderId != null ? oderId.hashCode() : 0);
+        result = 31 * result + textOfFeedback.hashCode();
+        result = 31 * result + dateOfFeedback.hashCode();
         return result;
     }
 

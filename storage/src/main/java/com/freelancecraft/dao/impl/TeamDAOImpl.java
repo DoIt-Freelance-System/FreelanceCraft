@@ -1,0 +1,10 @@
+package com.freelancecraft.dao.impl;
+
+import com.freelancecraft.dao.TeamDAO;
+import com.freelancecraft.entities.Team;
+
+/**
+ * Created by Vlad on 01.04.2017.
+ */
+public class TeamDAOImpl extends CrudDAOImpl<Team> implements TeamDAO {
+}

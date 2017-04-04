@@ -1,5 +1,6 @@
 package com.freelancecraft.dao;
 
+
 import java.io.Serializable;
 
 public interface CrudDAO<T, ID extends Serializable> {

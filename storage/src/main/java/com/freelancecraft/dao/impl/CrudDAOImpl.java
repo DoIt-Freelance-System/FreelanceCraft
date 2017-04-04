@@ -3,14 +3,23 @@ package com.freelancecraft.dao.impl;
 import com.freelancecraft.dao.CrudDAO;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.boot.jaxb.hbm.spi.EntityInfo;
 
-public class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
+
+    @PersistenceContext
+    protected EntityManager em;
 
     private SessionFactory sessionFactory;
 
+
     @Override
     public T save(T entity) {
-        return null;
+        this.em.persist(entity);
+        return entity;
     }
 
     @Override

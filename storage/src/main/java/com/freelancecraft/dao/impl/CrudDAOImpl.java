@@ -18,7 +18,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
     protected EntityManager em;
 
     private SessionFactory sessionFactory;
-    T dbObject;
+
 
     @Override
     public T save(T entity) {
@@ -40,14 +40,13 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
     public void delete(T entity) {
         Session session = this.sessionFactory.getCurrentSession();
 
-
     }
 
     @Override
     public void delete(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
         if (session.load(em.getClass(), id) != null) {
-            session.delete(em);
+            session.delete(id);
         }
 
     }

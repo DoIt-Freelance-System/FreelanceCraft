@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.io.Serializable;
 
 public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
 
@@ -17,7 +18,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
     protected EntityManager em;
 
     private SessionFactory sessionFactory;
-
+    T dbObject;
 
     @Override
     public T save(T entity) {
@@ -28,7 +29,7 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
     @Override
     public T find(Integer id) {
         Session session = this.sessionFactory.getCurrentSession();
-//        Query query = this.em.createQuery("select FROM T t WHERE t.id=:id");
+        //      Query query = this.em.createQuery("select FROM T t WHERE t.id=:id");
 //        query.setParameter("id", id);
 //        T t=(T) query.getSingleResult();
 //        return t;
@@ -39,10 +40,15 @@ public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
     public void delete(T entity) {
         Session session = this.sessionFactory.getCurrentSession();
 
+
     }
 
     @Override
     public void delete(Integer id) {
+        Session session = this.sessionFactory.getCurrentSession();
+        if (session.load(em.getClass(), id) != null) {
+            session.delete(em);
+        }
 
     }
 }

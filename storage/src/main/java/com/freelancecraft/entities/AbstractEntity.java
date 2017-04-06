@@ -1,8 +1,17 @@
 package com.freelancecraft.entities;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 public class AbstractEntity {
 
-protected int id;
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    protected int id;
 
     public AbstractEntity() {
     }

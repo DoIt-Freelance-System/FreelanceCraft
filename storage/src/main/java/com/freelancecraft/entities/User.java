@@ -10,10 +10,6 @@ import java.util.Date;
 @Table(name = "USERS")
 public class User extends AbstractEntity {
 
-    @Id
-    @Column(name = "user_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int userId;
 
     @Column(name = "nickname")
     private String nickName;
@@ -43,14 +39,6 @@ public class User extends AbstractEntity {
     private float rating;
 
     public User() {
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getNickName() {
@@ -129,10 +117,10 @@ public class User extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         User user = (User) o;
 
-        if (userId != user.userId) return false;
         if (Float.compare(user.rating, rating) != 0) return false;
         if (nickName != null ? !nickName.equals(user.nickName) : user.nickName != null) return false;
         if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
@@ -146,7 +134,7 @@ public class User extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = userId;
+        int result = super.hashCode();
         result = 31 * result + (nickName != null ? nickName.hashCode() : 0);
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
@@ -162,8 +150,8 @@ public class User extends AbstractEntity {
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
-                ", nickName='" + nickName + '\'' +
+                "nickName='" + nickName + '\'' +
+                ", id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", mail='" + mail + '\'' +

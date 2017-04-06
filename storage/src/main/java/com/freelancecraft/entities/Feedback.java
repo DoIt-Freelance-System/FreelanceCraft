@@ -7,10 +7,6 @@ import java.util.Date;
 @Table(name = "FEEDBACK")
 public class Feedback extends AbstractEntity {
 
-    @Column(name = "feedback_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int feedbackId;
-
     @OneToMany
     @JoinColumn(name = "user_id")
     private User feedbackSender;
@@ -30,14 +26,6 @@ public class Feedback extends AbstractEntity {
     private Date dateOfFeedback;
 
     public Feedback() {
-    }
-
-    public int getFeedbackId() {
-        return feedbackId;
-    }
-
-    public void setFeedbackId(int feedbackId) {
-        this.feedbackId = feedbackId;
     }
 
     public User getFeedbackSender() {
@@ -84,15 +72,15 @@ public class Feedback extends AbstractEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Feedback feedback = (Feedback) o;
 
-        if (feedbackId != feedback.feedbackId) return false;
-        if (oderId != feedback.oderId) return false;
         if (feedbackSender != null ? !feedbackSender.equals(feedback.feedbackSender) : feedback.feedbackSender != null)
             return false;
         if (feedbackRecipient != null ? !feedbackRecipient.equals(feedback.feedbackRecipient) : feedback.feedbackRecipient != null)
             return false;
+        if (oderId != null ? !oderId.equals(feedback.oderId) : feedback.oderId != null) return false;
         if (textOfFeedback != null ? !textOfFeedback.equals(feedback.textOfFeedback) : feedback.textOfFeedback != null)
             return false;
         return dateOfFeedback != null ? dateOfFeedback.equals(feedback.dateOfFeedback) : feedback.dateOfFeedback == null;
@@ -100,20 +88,20 @@ public class Feedback extends AbstractEntity {
 
     @Override
     public int hashCode() {
-        int result = feedbackId;
-        result = 31 * result + feedbackSender.hashCode();
+        int result = super.hashCode();
+        result = 31 * result + (feedbackSender != null ? feedbackSender.hashCode() : 0);
         result = 31 * result + (feedbackRecipient != null ? feedbackRecipient.hashCode() : 0);
         result = 31 * result + (oderId != null ? oderId.hashCode() : 0);
-        result = 31 * result + textOfFeedback.hashCode();
-        result = 31 * result + dateOfFeedback.hashCode();
+        result = 31 * result + (textOfFeedback != null ? textOfFeedback.hashCode() : 0);
+        result = 31 * result + (dateOfFeedback != null ? dateOfFeedback.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
         return "Feedback{" +
-                "feedbackId=" + feedbackId +
-                ", feedbackSender=" + feedbackSender +
+                "feedbackSender=" + feedbackSender +
+                ", id=" + id +
                 ", feedbackRecipient=" + feedbackRecipient +
                 ", oderId=" + oderId +
                 ", textOfFeedback='" + textOfFeedback + '\'' +

@@ -8,7 +8,7 @@ public interface CrudDAO<T> {
     /**
      * @param entity: entity to save
      */
-    void save(T entity);
+    Serializable save(T entity);
 
     /**
      * @param entity: entity to save or update
@@ -36,7 +36,7 @@ public interface CrudDAO<T> {
     /**
      * @param id: primary key of entity to delete
      */
-    void delete(Serializable id);
+    T delete(Serializable id);
 
     /**
      * Delete all records

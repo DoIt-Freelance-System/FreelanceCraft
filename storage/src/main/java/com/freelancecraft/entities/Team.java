@@ -4,10 +4,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "TEAMS")
-public class Team {
-    @Column(name = "team_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int teamId;
+public class Team extends AbstractEntity {
+
     @Column(name = "name")
     private String name;
     @ManyToMany
@@ -18,14 +16,6 @@ public class Team {
     private Order order;
 
     public Team() {
-    }
-
-    public int getTeamId() {
-        return teamId;
-    }
-
-    public void setTeamId(int teamId) {
-        this.teamId = teamId;
     }
 
     public String getName() {
@@ -53,8 +43,21 @@ public class Team {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Team team = (Team) o;
+
+        if (name != null ? !name.equals(team.name) : team.name != null) return false;
+        if (user != null ? !user.equals(team.user) : team.user != null) return false;
+        return order != null ? order.equals(team.order) : team.order == null;
+    }
+
+    @Override
     public int hashCode() {
-        int result = teamId;
+        int result = super.hashCode();
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (user != null ? user.hashCode() : 0);
         result = 31 * result + (order != null ? order.hashCode() : 0);
@@ -62,24 +65,11 @@ public class Team {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Team team = (Team) o;
-
-        if (teamId != team.teamId) return false;
-        if (name != null ? !name.equals(team.name) : team.name != null) return false;
-        if (user != null ? !user.equals(team.user) : team.user != null) return false;
-        return order != null ? order.equals(team.order) : team.order == null;
-    }
-
-    @Override
     public String toString() {
         return "Team{" +
-                "teamId=" + teamId +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", user=" + user +
+                ", id=" + id +
                 ", order=" + order +
                 '}';
     }

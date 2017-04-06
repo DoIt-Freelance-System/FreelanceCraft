@@ -8,11 +8,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "MESSAGES")
-public class Message {
+public class Message extends AbstractEntity {
 
-    @Column(name = "message_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int messageId;
 
     @OneToMany
     @JoinColumn(name = "user_id")
@@ -36,14 +33,6 @@ public class Message {
 
 
     public Message() {
-    }
-
-    public int getMessageId() {
-        return messageId;
-    }
-
-    public void setMessageId(int messageId) {
-        this.messageId = messageId;
     }
 
     public User getMessageSender() {
@@ -98,10 +87,10 @@ public class Message {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Message message = (Message) o;
 
-        if (messageId != message.messageId) return false;
         if (messageSender != null ? !messageSender.equals(message.messageSender) : message.messageSender != null)
             return false;
         if (messageRecipient != null ? !messageRecipient.equals(message.messageRecipient) : message.messageRecipient != null)
@@ -116,7 +105,7 @@ public class Message {
 
     @Override
     public int hashCode() {
-        int result = messageId;
+        int result = super.hashCode();
         result = 31 * result + (messageSender != null ? messageSender.hashCode() : 0);
         result = 31 * result + (messageRecipient != null ? messageRecipient.hashCode() : 0);
         result = 31 * result + (textOfMessage != null ? textOfMessage.hashCode() : 0);
@@ -129,7 +118,7 @@ public class Message {
     @Override
     public String toString() {
         return "Message{" +
-                "messageId=" + messageId +
+                "id=" + id +
                 ", messageSender=" + messageSender +
                 ", messageRecipient=" + messageRecipient +
                 ", textOfMessage='" + textOfMessage + '\'' +

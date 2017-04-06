@@ -7,11 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "PAYMENTS")
-public class Payment {
-
-    @Column(name = "payment_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int paymentId;
+public class Payment extends AbstractEntity {
 
     @OneToMany
     @JoinColumn(name = "order_id")
@@ -27,14 +23,6 @@ public class Payment {
     private PaymentStatus paymentStatus;
 
     public Payment() {
-    }
-
-    public int getPaymentId() {
-        return paymentId;
-    }
-
-    public void setPaymentId(int paymentId) {
-        this.paymentId = paymentId;
     }
 
     public Order getOrder() {
@@ -73,10 +61,10 @@ public class Payment {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Payment payment = (Payment) o;
 
-        if (paymentId != payment.paymentId) return false;
         if (Double.compare(payment.paymentAmount, paymentAmount) != 0) return false;
         if (order != null ? !order.equals(payment.order) : payment.order != null) return false;
         if (dateOfPayment != null ? !dateOfPayment.equals(payment.dateOfPayment) : payment.dateOfPayment != null)
@@ -86,9 +74,8 @@ public class Payment {
 
     @Override
     public int hashCode() {
-        int result;
+        int result = super.hashCode();
         long temp;
-        result = paymentId;
         result = 31 * result + (order != null ? order.hashCode() : 0);
         temp = Double.doubleToLongBits(paymentAmount);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
@@ -100,8 +87,8 @@ public class Payment {
     @Override
     public String toString() {
         return "Payment{" +
-                "paymentId=" + paymentId +
-                ", order=" + order +
+                "order=" + order +
+                ", id=" + id +
                 ", paymentAmount=" + paymentAmount +
                 ", dateOfPayment=" + dateOfPayment +
                 ", paymentStatus=" + paymentStatus +

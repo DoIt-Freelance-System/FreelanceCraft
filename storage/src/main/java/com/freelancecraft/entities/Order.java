@@ -8,10 +8,8 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
-    @Column(name = "order_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int orderId;
+public class Order extends AbstractEntity {
+
     @Column(name = "name")
     private String name;
     @ManyToMany
@@ -31,14 +29,6 @@ public class Order {
     private OrderStatus orderStatus;
 
     public Order() {
-    }
-
-    public int getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
     }
 
     public String getName() {
@@ -109,10 +99,10 @@ public class Order {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
 
         Order order = (Order) o;
 
-        if (orderId != order.orderId) return false;
         if (Double.compare(order.price, price) != 0) return false;
         if (name != null ? !name.equals(order.name) : order.name != null) return false;
         if (customer != null ? !customer.equals(order.customer) : order.customer != null) return false;
@@ -127,9 +117,8 @@ public class Order {
 
     @Override
     public int hashCode() {
-        int result;
+        int result = super.hashCode();
         long temp;
-        result = orderId;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (customer != null ? customer.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
@@ -145,8 +134,8 @@ public class Order {
     @Override
     public String toString() {
         return "Order{" +
-                "orderId=" + orderId +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
+                ", id=" + id +
                 ", customer=" + customer +
                 ", description='" + description + '\'' +
                 ", price=" + price +

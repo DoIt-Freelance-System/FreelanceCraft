@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ATTACHMENTS")
-public class Attachment {
+public class Attachment extends AbstractEntity {
 
     @Column(name = "attachment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

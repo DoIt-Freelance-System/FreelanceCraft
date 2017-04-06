@@ -5,7 +5,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "FEEDBACK")
-public class Feedback {
+public class Feedback extends AbstractEntity {
 
     @Column(name = "feedback_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

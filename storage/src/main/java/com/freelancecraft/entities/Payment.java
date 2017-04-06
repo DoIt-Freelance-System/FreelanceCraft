@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "PAYMENTS")
-public class Payment {
+public class Payment extends AbstractEntity {
 
     @Column(name = "payment_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

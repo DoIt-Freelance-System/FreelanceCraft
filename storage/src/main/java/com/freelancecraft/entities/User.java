@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User extends AbstractEntity {
 
     @Id
     @Column(name = "user_id")

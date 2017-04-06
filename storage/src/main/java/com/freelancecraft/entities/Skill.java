@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name = "SKILLS")
-public class Skill {
+public class Skill extends AbstractEntity {
 
     @Id
     @Column(name = "skill_id")

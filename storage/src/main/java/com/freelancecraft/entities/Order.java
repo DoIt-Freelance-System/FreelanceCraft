@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "ORDERS")
-public class Order {
+public class Order extends AbstractEntity {
     @Column(name = "order_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int orderId;

@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "MESSAGES")
-public class Message {
+public class Message extends AbstractEntity {
 
     @Column(name = "message_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)

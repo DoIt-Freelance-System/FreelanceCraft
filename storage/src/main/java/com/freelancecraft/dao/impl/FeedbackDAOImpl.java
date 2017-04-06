@@ -9,6 +9,6 @@ import com.freelancecraft.entities.Feedback;
 public class FeedbackDAOImpl extends CrudDAOImpl<Feedback> implements FeedbackDAO {
     @Override
     public String getFindQuery(Integer id) {
-        return "SELECT * FROM FEEDBACKS a WHERE a.id="+ id;
+        return "SELECT * FROM FEEDBACK a WHERE a.id="+ id;
     }
 }

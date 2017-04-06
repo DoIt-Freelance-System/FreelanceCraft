@@ -6,7 +6,6 @@ import javax.persistence.*;
 @Table(name = "ATTACHMENTS")
 public class Attachment extends AbstractEntity {
 
-
     @OneToMany
     @JoinColumn(name = "message_id")
     private Message message;

@@ -1,7 +1,7 @@
 package com.freelancecraft.entities;
 
-import com.freelancecraft.enums.OrderStatus;
-import com.freelancecraft.enums.OrderType;
+import com.freelancecraft.entities.enums.OrderStatus;
+import com.freelancecraft.entities.enums.OrderType;
 
 import javax.persistence.*;
 import java.util.Date;

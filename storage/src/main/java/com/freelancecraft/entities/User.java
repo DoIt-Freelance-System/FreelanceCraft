@@ -1,7 +1,7 @@
 package com.freelancecraft.entities;
 
-import com.freelancecraft.enums.UserRole;
-import com.freelancecraft.enums.UserStatus;
+import com.freelancecraft.entities.enums.UserRole;
+import com.freelancecraft.entities.enums.UserStatus;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 @Table(name = "USERS")
 public class User extends AbstractEntity {
-
 
     @Column(name = "nickname")
     private String nickName;

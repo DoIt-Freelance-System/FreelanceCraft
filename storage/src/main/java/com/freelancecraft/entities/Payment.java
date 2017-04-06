@@ -1,6 +1,6 @@
 package com.freelancecraft.entities;
 
-import com.freelancecraft.enums.PaymentStatus;
+import com.freelancecraft.entities.enums.PaymentStatus;
 
 import javax.persistence.*;
 import java.util.Date;

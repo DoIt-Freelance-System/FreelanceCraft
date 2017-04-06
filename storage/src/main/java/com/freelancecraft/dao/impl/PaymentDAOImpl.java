@@ -3,14 +3,9 @@ package com.freelancecraft.dao.impl;
 import com.freelancecraft.dao.PaymentDAO;
 import com.freelancecraft.entities.Payment;
 
-/**
- * Created by Vlad on 01.04.2017.
- */
 public class PaymentDAOImpl extends CrudDAOImpl<Payment> implements PaymentDAO {
-    @Override
-    public String getFindQuery(Integer id) {
-        return "SELECT * FROM PAYMENTS a WHERE a.id="+ id;
+
+    public PaymentDAOImpl(Class<Payment> entityType) {
+        super(entityType);
     }
-
-
 }

@@ -1,20 +1,59 @@
 package com.freelancecraft.dao;
 
-
-import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.List;
 
-public interface CrudDAO<T, ID extends Serializable> {
+public interface CrudDAO<T> {
 
-    T save(T entity);
+    /**
+     * @param entity: entity to save
+     * @return Identifier of saved entity
+     */
+    Serializable save(T entity);
 
-    T find(ID id);
+    /**
+     * @param entity: entity to save or update
+     */
+    void saveOrUpdate(T entity);
 
+    /**
+     * Find by primary key
+     * @param id: primary key
+     * @return unique entity
+     */
+    T find(Serializable id);
+
+    /**
+     * Find all records
+     * @return: list of entities
+     */
+    List<T> findAll();
+
+    /**
+     * @param entity: entity to delete
+     */
     void delete(T entity);
 
-    void delete(ID id);
+    /**
+     * @param id: primary key of entity to delete
+     */
+    void delete(Serializable id);
 
-    abstract String getFindQuery(Integer id);
+    /**
+     * Delete all records
+     */
+    void deleteAll();
 
+    /**
+     * Clear session
+     */
+    void clear();
+
+    /**
+     * Flush session
+     */
+    void flush();
+
+//    abstract String getFindQuery(Integer id);
 
 }

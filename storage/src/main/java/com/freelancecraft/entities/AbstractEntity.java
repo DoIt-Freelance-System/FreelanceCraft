@@ -4,22 +4,23 @@ import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 public class AbstractEntity {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected int id;
+    protected Long id;
 
     public AbstractEntity() {
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +31,11 @@ public class AbstractEntity {
 
         AbstractEntity that = (AbstractEntity) o;
 
-        return id == that.id;
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return id;
+        return id.hashCode();
     }
 }

@@ -1,4 +1,4 @@
-package com.freelancecraft.enums;
+package com.freelancecraft.entities.enums;
 
 public enum MessageStatus {
     SENT, RECEIVED;

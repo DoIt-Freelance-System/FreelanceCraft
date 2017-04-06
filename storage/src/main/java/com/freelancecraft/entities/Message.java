@@ -1,7 +1,7 @@
 package com.freelancecraft.entities;
 
-import com.freelancecraft.enums.MessageStatus;
-import com.freelancecraft.enums.MessageType;
+import com.freelancecraft.entities.enums.MessageStatus;
+import com.freelancecraft.entities.enums.MessageType;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 @Table(name = "MESSAGES")
 public class Message extends AbstractEntity {
-
 
     @OneToMany
     @JoinColumn(name = "user_id")

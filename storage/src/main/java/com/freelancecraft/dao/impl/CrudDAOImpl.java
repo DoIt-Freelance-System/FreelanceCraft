@@ -1,50 +1,70 @@
 package com.freelancecraft.dao.impl;
 
 import com.freelancecraft.dao.CrudDAO;
-import org.hibernate.Criteria;
+import com.freelancecraft.entities.AbstractEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.boot.jaxb.hbm.spi.EntityInfo;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
-import javax.persistence.PersistenceContext;
-import javax.persistence.Query;
 import java.io.Serializable;
+import java.util.List;
 
-public abstract class CrudDAOImpl<T> implements CrudDAO<T, Integer> {
+public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
 
-    @PersistenceContext
-    protected EntityManager em;
-
+    @Autowired
     private SessionFactory sessionFactory;
+    private final Class<T> entityType;
 
+    public CrudDAOImpl(Class<T> entityType) {
+        this.entityType = entityType;
+    }
 
-    @Override
-    public T save(T entity) {
-        this.em.persist(entity);
-        return entity;
+    protected final Session getSession() {
+        return this.sessionFactory.getCurrentSession();
     }
 
     @Override
-    public T find(Integer id) {
-        Query query = this.em.createQuery(this.getFindQuery(id));
-        T t=(T) query.getSingleResult();
-        return t;
+    public Serializable save(T entity) {
+        return null;
+    }
+
+    @Override
+    public void saveOrUpdate(T entity) {
+
+    }
+
+    @Override
+    public T find(Serializable id) {
+        return null;
+    }
+
+    @Override
+    public List<T> findAll() {
+        return null;
     }
 
     @Override
     public void delete(T entity) {
-        Session session = this.sessionFactory.getCurrentSession();
 
     }
 
     @Override
-    public void delete(Integer id) {
-        Session session = this.sessionFactory.getCurrentSession();
-        if (session.load(em.getClass(), id) != null) {
-            session.delete(id);
-        }
+    public void delete(Serializable id) {
 
+    }
+
+    @Override
+    public void deleteAll() {
+
+    }
+
+    @Override
+    public void clear() {
+        getSession().clear();
+    }
+
+    @Override
+    public void flush() {
+        getSession().flush();
     }
 }

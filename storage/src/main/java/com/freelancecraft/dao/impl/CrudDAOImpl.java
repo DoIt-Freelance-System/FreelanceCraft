@@ -24,8 +24,8 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
     }
 
     @Override
-    public Serializable save(T entity) {
-        return null;
+    public void save(T entity) {
+
     }
 
     @Override

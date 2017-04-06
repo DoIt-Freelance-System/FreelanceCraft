@@ -7,9 +7,8 @@ public interface CrudDAO<T> {
 
     /**
      * @param entity: entity to save
-     * @return Identifier of saved entity
      */
-    Serializable save(T entity);
+    void save(T entity);
 
     /**
      * @param entity: entity to save or update

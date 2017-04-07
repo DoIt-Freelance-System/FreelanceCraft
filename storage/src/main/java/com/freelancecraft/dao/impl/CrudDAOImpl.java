@@ -24,8 +24,8 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
     }
 
     @Override
-    public Serializable save(T entity) {
-        return getSession().save(entity);
+    public void save(T entity) {
+         getSession().save(entity);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
 
     @Override
     public void delete(T entity) {
-        getSession().saveOrUpdate(entity);
+        getSession().delete(entity);
     }
 
     @Override
-    public T delete(Serializable id) {
-        return (T) getSession().get(entityType, id);
+    public void delete(Serializable id) {
+        this.getSession().delete(id);
     }
 
     @Override

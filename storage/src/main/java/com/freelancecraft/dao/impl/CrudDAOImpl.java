@@ -35,12 +35,12 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
 
     @Override
     public T find(Serializable id) {
-        return (T) getSession().get(this.entityType, id);
+        return (T) getSession().get(entityType, id);
     }
 
     @Override
     public List<T> findAll() {
-        return getSession().createQuery("From " + this.entityType.getName()).list();
+        return getSession().createQuery("From " + entityType.getName()).list();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
 
     @Override
     public T delete(Serializable id) {
-        return (T) getSession().get(this.entityType, id);
+        return (T) getSession().get(entityType, id);
     }
 
     @Override

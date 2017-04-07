@@ -40,7 +40,7 @@ public class CrudDAOImpl<T extends AbstractEntity> implements CrudDAO<T> {
 
     @Override
     public List<T> findAll() {
-        return getSession().createCriteria(this.entityType).list();
+        return getSession().createQuery("From " + this.entityType.getName()).list();
     }
 
     @Override

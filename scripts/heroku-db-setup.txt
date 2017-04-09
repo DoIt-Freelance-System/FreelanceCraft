@@ -1,0 +1,26 @@
+Readme about how to connect to heroku DB.
+
+Heroku DB Credentials:
+Host:        ec2-54-221-221-153.compute-1.amazonaws.com
+Database:    dp48b61jkprqg
+User:        xwjqqrctfiukci
+Port:        5432
+Password:    247e18b1a243ac2947965beb5b0be63bb6a96320177d8d6cc21763ef6d16edbd
+URI:         postgres://xwjqqrctfiukci:247e18b1a243ac2947965beb5b0be63bb6a96320177d8d6cc21763ef6d16edbd@ec2-54-221-221-153.compute-1.amazonaws.com:5432/dp48b61jkprqg
+Heroku CLI:  heroku pg:psql postgresql-triangular-98638 --app freelancecraft
+
+
+INFO:
+1. Free Heroku DB is Postgress.
+2. Heroku Postgres DB launches in about a minute, so at first start be patient.
+3. Heroku Postgres DB go in sleep mode after 30 minutes of idle state.
+4. Heroku Postgres DB uses SSL, so you need to specialize it while connecting to it.
+
+To Set up the connection in IDEA:
+a) You need to specify credentials (You can find them upper)
+b) it in IDEA in Setup DB properties in Tab 'Advanced' set:
+   SSL=true
+   sslfactory=org.postgresql.ssl.NonValidatingFactory
+c) in database.properties in jdbc.url we need to specify it as well using line shown down:
+   ?ssl=true&sslfactory=org.postgresql.ssl.NonValidatingFactory
+

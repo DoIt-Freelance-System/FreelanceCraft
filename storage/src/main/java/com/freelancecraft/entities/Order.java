@@ -14,7 +14,7 @@ public class Order extends AbstractEntity {
     private String name;
     @ManyToMany
     @JoinColumn(name = "user_id")
-    private User customer;
+    private User customer; //TODO ManyToMany, need Map
     @Column(name = "description")
     private String description;
     @Column(name = "price")

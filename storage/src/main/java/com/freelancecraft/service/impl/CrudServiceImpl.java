@@ -44,7 +44,11 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
     @Override
     public T findOne(Serializable id) throws NoSuchEntityException {
         //в случае если сущность по айди не найдена, выпустить NoSuchEntityException с соотв. сообщением.
-        return null;
+        T isFound = crudDao.find(id);
+        if (isFound == null) {
+            throw new NoSuchEntityException();
+        } else
+            return isFound;
     }
 
     @Override

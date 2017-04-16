@@ -51,6 +51,7 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
             return isFound;
     }
 
+
     @Override
     public void delete(T entity) {
 

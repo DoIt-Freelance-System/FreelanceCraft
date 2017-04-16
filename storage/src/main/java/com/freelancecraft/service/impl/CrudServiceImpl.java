@@ -28,8 +28,10 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
         //в противном случае выпустить EntityAlreadyExistsException с соотв. сообщением.
         if (!exists((Serializable) entity)) {
             crudDao.save(entity);
-        } else throw new EntityAlreadyExistsException();
+        } else {
+            throw new EntityAlreadyExistsException();
 
+        }
     }
 
     @Override
@@ -38,7 +40,9 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
         //в противном случае выпустить NoSuchEntityException с соотв. сообщением.
         if (exists((Serializable) entity)) {
             crudDao.saveOrUpdate(entity);
-        } else throw new NoSuchEntityException();
+        } else {
+            throw new NoSuchEntityException();
+        }
     }
 
     @Override
@@ -46,8 +50,9 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
         //в случае если сущность по айди не найдена, выпустить NoSuchEntityException с соотв. сообщением.
         if (!exists(id)) {
             throw new NoSuchEntityException();
-        } else
+        } else {
             return crudDao.find(id);
+        }
     }
 
 
@@ -63,11 +68,11 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
 
     @Override
     public boolean exists(Serializable id) {
-        T isFound = null;
-        if (id == (crudDao.find((Serializable) isFound))) {
+        if (crudDao.find(id) != null) {
             return true;
-        } else
+        } else {
             return false;
+        }
     }
 
     @Override

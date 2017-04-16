@@ -36,7 +36,9 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
     public void update(T entity) throws NoSuchEntityException {
         //перед апдейтом сущности сделать проверку на то, что сущность точно не новая и уже создавалась,
         //в противном случае выпустить NoSuchEntityException с соотв. сообщением.
-
+        if (entity.equals(crudDao.find((Serializable) entity))) {
+            crudDao.saveOrUpdate(entity);
+        } else throw new NoSuchEntityException();
     }
 
     @Override

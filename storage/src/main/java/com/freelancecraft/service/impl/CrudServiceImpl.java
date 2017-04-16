@@ -26,7 +26,7 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
     public void create(T entity) throws EntityAlreadyExistsException {
         //перед созданием сущности сделать проверку на то, что сущность точно новая и еще не создавалась,
         //в противном случае выпустить EntityAlreadyExistsException с соотв. сообщением.
-        if (entity != crudDao.find((Serializable) entity)) {
+        if (!entity.equals(crudDao.find((Serializable) entity))) {
             crudDao.save(entity);
         } else throw new EntityAlreadyExistsException();
 

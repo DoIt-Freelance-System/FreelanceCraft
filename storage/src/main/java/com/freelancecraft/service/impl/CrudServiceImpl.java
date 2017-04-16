@@ -59,7 +59,7 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
 
     @Override
     public void delete(Serializable id) {
-
+        crudDao.delete(id);
     }
 
     @Override

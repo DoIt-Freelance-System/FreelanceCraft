@@ -54,7 +54,7 @@ public class CrudServiceImpl<T extends AbstractEntity> implements CrudService<T>
 
     @Override
     public void delete(T entity) {
-
+        crudDao.delete(entity);
     }
 
     @Override

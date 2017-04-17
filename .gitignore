@@ -67,3 +67,6 @@ fabric.properties
 
 # Created by .ignore support plugin (hsz.mobi)
 resources/app.properties
+/logic/target/
+/presentation/target/
+/storage/target/

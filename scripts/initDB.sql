@@ -10,12 +10,12 @@ DROP TABLE if EXISTS USERS;
 
 
 CREATE TABLE SKILLS(
-  skill_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE USERS(
-  user_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   nickname VARCHAR(255),
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
@@ -28,7 +28,7 @@ CREATE TABLE USERS(
 );
 
 CREATE TABLE ORDERS(
-  order_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   customer INT NOT NULL REFERENCES USERS,
   description TEXT NOT NULL,
@@ -40,46 +40,46 @@ CREATE TABLE ORDERS(
 );
 
 CREATE TABLE MESSAGES(
-  message_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   text_of_message TEXT NOT NULL,
   date_of_sending TIMESTAMP DEFAULT current_timestamp,
-  sender INT NOT NULL REFERENCES USERS,
-  recipient INT NOT NULL REFERENCES USERS,
-  type VARCHAR(255) NOT NULL,
-  status VARCHAR(255) NOT NULL /* set default*/
+  message_sender INT NOT NULL REFERENCES USERS,
+  message_recipient INT NOT NULL REFERENCES USERS,
+  message_type VARCHAR(255) NOT NULL,
+  message_status VARCHAR(255) NOT NULL /* set default*/
 );
 
 CREATE TABLE PAYMENTS(
-  payment_id SERIAL PRIMARY KEY,
-  ammount DOUBLE PRECISION NOT NULL,
+  id SERIAL PRIMARY KEY,
+  payment_amount DOUBLE PRECISION NOT NULL,
   date_of_payment TIMESTAMP DEFAULT current_timestamp,
   order_id INT NOT NULL REFERENCES ORDERS,
-  status VARCHAR(255) NOT NULL /* set default*/
+  payment_status VARCHAR(255) NOT NULL /* set default*/
 );
 
 CREATE TABLE FEEDBACK(
-  feedback_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   date_of_feedback TIMESTAMP DEFAULT current_timestamp,
   text_of_feedback TEXT NOT NULL,
-  sender INT NOT NULL REFERENCES USERS,
-  recipient INT REFERENCES USERS,
+  feedback_sender INT NOT NULL REFERENCES USERS,
+  feedback_recipient INT REFERENCES USERS,
   order_id INT REFERENCES ORDERS
 );
 
 CREATE TABLE ATTACHMENTS(
-  attachment_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   link VARCHAR(255) NOT NULL,
   message_id INT REFERENCES MESSAGES,
   order_id INT REFERENCES ORDERS
 );
 
 create table USER_SKILLS(
-  user_id INT REFERENCES USERS,
+  id INT REFERENCES USERS,
   skill_id INT REFERENCES SKILLS
 );
 
 CREATE TABLE TEAMS (
-  team_id SERIAL PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   name VARCHAR(255) NOT NULL,
   user_id INT REFERENCES USERS,
   order_id INT REFERENCES ORDERS

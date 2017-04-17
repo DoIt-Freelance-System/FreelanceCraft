@@ -11,7 +11,7 @@ Heroku CLI:  heroku pg:psql postgresql-triangular-98638 --app freelancecraft
 
 
 INFO:
-1. Free Heroku DB is Postgress.
+1. Free Heroku DB is Postgres.
 2. Heroku Postgres DB launches in about a minute, so at first start be patient.
 3. Heroku Postgres DB go in sleep mode after 30 minutes of idle state.
 4. Heroku Postgres DB uses SSL, so you need to specialize it while connecting to it.
